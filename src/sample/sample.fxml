@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" prefHeight="710.0" prefWidth="1044.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="710.0" prefWidth="1056.0" styleClass="text-field" stylesheets="@style.css">
+         <children>
+            <TableView fx:id="cmdTableView" layoutX="5.0" layoutY="94.0" onMouseClicked="#CommandesChanged" prefHeight="245.0" prefWidth="425.0">
+              <columns>
+                  <TableColumn prefWidth="55.0" text="Column X" />
+                <TableColumn maxWidth="300.0" minWidth="109.0" prefWidth="137.0" text="C1" />
+                  <TableColumn prefWidth="95.0" text="Column X" />
+                <TableColumn prefWidth="136.0" text="C2" />
+              </columns>
+            </TableView>
+            <Button fx:id="createBtn" layoutX="294.0" layoutY="392.0" mnemonicParsing="false" onAction="#creatBtnClick" text="creer facture" />
+            <Button fx:id="voirBtn" layoutX="294.0" layoutY="457.0" mnemonicParsing="false" onAction="#infoBtnClick" prefHeight="31.0" prefWidth="105.0" text="voir facture" />
+            <Label layoutX="34.0" layoutY="21.0" styleClass="head-background" stylesheets="@style.css" text="les commandes">
+               <font>
+                  <Font size="21.0" />
+               </font></Label>
+            <Pane fx:id="paneFacture" layoutX="419.0" layoutY="37.0" prefHeight="546.0" prefWidth="569.0">
+               <children>
+                  <Label layoutX="15.0" layoutY="7.0" prefHeight="39.0" prefWidth="237.0" text="la facure correspondante">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="montantTotal" disable="true" layoutX="229.0" layoutY="280.0" prefHeight="39.0" prefWidth="220.0" />
+                  <TextField fx:id="pourcentageReduction" disable="true" layoutX="229.0" layoutY="210.0" prefHeight="39.0" prefWidth="220.0" />
+                  <TextField fx:id="idUser" disable="true" layoutX="229.0" layoutY="153.0" prefHeight="39.0" prefWidth="220.0" />
+                  <TextField fx:id="modePaiement" disable="true" layoutX="229.0" layoutY="101.0" prefHeight="39.0" prefWidth="220.0" />
+                  <TextField fx:id="dateFacturation" disable="true" layoutX="229.0" layoutY="49.0" prefHeight="39.0" prefWidth="220.0" styleClass="text-field" stylesheets="@style.css" />
+                  <Label layoutX="23.0" layoutY="53.0" prefHeight="31.0" prefWidth="144.0" text="Date facuration" />
+                  <Label layoutX="23.0" layoutY="110.0" text="Mode paiement" />
+                  <Label layoutX="23.0" layoutY="162.0" text="id utilisateur" />
+                  <Label layoutX="23.0" layoutY="219.0" text="pourcentage de reduction" />
+                  <Label layoutX="23.0" layoutY="285.0" text="Montant total Commande" />
+                  <Label layoutX="23.0" layoutY="356.0" text="Total" />
+                  <TextField fx:id="total" disable="true" layoutX="229.0" layoutY="347.0" prefHeight="39.0" prefWidth="220.0" />
+                  <Separator layoutX="11.0" layoutY="-80.0" orientation="VERTICAL" prefHeight="484.0" prefWidth="6.0" />
+               </children>
+            </Pane>
+            <RadioButton fx:id="facture" layoutX="51.0" layoutY="64.0" mnemonicParsing="false" onAction="#facturer" text="facturée" />
+            <RadioButton fx:id="nonfacture" layoutX="198.0" layoutY="64.0" mnemonicParsing="false" onAction="#nonfacture" text="non Facturée" />
+            <Spinner fx:id="mode" layoutX="13.0" layoutY="392.0" />
+            <Label layoutX="13.0" layoutY="345.0" prefHeight="31.0" prefWidth="256.0" text="Mode de paiement pour la commande" />
+         </children>
+      </AnchorPane>
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+   </children>
+</GridPane>
