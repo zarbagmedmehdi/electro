@@ -19,6 +19,7 @@ public class CommandeItem {
     public CommandeItem() {
     }
 
+
     public CommandeItem(int quantite, Long electromenagerID, Long commandeId) {
         this.quantite = quantite;
         this.electromenagerID = electromenagerID;

@@ -23,6 +23,10 @@ public class Facture {
     public Facture() {
     }
 
+    public Facture(Long commandeId) {
+        this.commandeId = commandeId;
+    }
+
     public Facture(Long id, Date dateFacture, String modePaiement, Long commandeId, Long utilisateurId, Long reductionID) {
         this.id = id;
         this.dateFacture = dateFacture;

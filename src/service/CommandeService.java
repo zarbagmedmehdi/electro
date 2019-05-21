@@ -6,6 +6,7 @@
 package service;
 
 import bean.Commande;
+import bean.Facture;
 import oracle.jdbc.OracleTypes;
 import util.Connexion;
 
@@ -62,7 +63,7 @@ public class CommandeService {
         return list;
 
     }
-    public Float getMontantTotal(int idCommande ) throws SQLException {
+    public Float getMontantTotal(long idCommande ) throws SQLException {
         Connection connection=null;
         CallableStatement cs = null;
         Float montant=0F;
@@ -72,7 +73,7 @@ public class CommandeService {
 
            cs = connection.prepareCall("{ ?=call getMontantTotalCommande(?)}");
            cs.registerOutParameter(1, Types.FLOAT);
-            cs.setInt(2, idCommande);
+            cs.setLong(2, idCommande);
             cs.execute();
             // ResultSet result=cs.getResultSet();
             montant=  cs.getFloat(1);
@@ -87,5 +88,33 @@ public class CommandeService {
 
         }
         return montant;
+    }
+    public Commande getCommandeByFacture (Facture f) throws SQLException {
+        Connection connection=null;
+        CallableStatement cs = null;
+        Commande commande=new Commande();
+        try {
+            connection=cnx.getConnectionStatement();
+
+            CallableStatement call =
+                    connection. prepareCall("select * from commande where ID=?");
+            call.setLong(1,f.getCommandeId());
+            call.execute ();
+
+            ResultSet rset=call.getResultSet();
+            rset.next();
+            commande=instantiateCommande(rset);
+
+        } catch (Exception e) {
+            System.err.println("Got an exception!  ");
+            System.err.println ( " e" +e.getMessage());
+        } finally {
+            if (cs != null) cs.close();
+            if (connection != null){ connection.close();
+                System.out.println("connection closed   ");}
+        }
+        System.out.println(commande.toString());
+        return commande;
+
     }
 }

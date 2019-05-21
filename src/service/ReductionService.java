@@ -27,18 +27,22 @@ public class ReductionService {
         return new Reduction(r.getLong("id"),r.getFloat("pourcentage"));
     }
 
-    public Reduction getReductionAdequat (long id ) throws SQLException {
+    public Reduction getReductionAdequat (long  id , float pourcentage ) throws SQLException {
         Connection connection=null;
         CallableStatement cs = null;
-        Facture facture=new Facture();
         Reduction reduction=new Reduction();
+     String query=   "select * from reduction where 1=1";
+     if (id!=0){ query+=" and  id=?";}
+        if (pourcentage!=0F){ query+=" and  pourcentage=?";}
         try {
             connection=cnx.getConnectionStatement();
             //   cs = connection.prepareCall(" select getCommande from dual ");
             //   cs.registerOutParameter(1, OracleTypes.CURSOR);
             CallableStatement call =
-                    connection. prepareCall("select * from reduction where id=?");
-            call.setLong(1,id);
+                    connection. prepareCall(query);
+            if (id!=0){ call.setLong(1,id);}
+            if (pourcentage!=0F){  call.setFloat(1,pourcentage);;}
+
             call.execute ();
 
             ResultSet rset=call.getResultSet();
@@ -53,7 +57,6 @@ public class ReductionService {
             if (connection != null){ connection.close();
                 System.out.println("connection closed   ");}
         }
-        System.out.println(facture.toString());
         return reduction;
 
     }
@@ -71,7 +74,6 @@ public class ReductionService {
             call.execute ();
 
             ResultSet rset=call.getResultSet();
-            rset.next();
             reductions=creatListReductions(rset);
 
         } catch (Exception e) {
@@ -94,5 +96,14 @@ public class ReductionService {
         }
         return list;
 
+    }
+    public List<String> getListPourcentage() throws SQLException {
+        List<Reduction> rs=getReductions();
+        List<String> list=new ArrayList<>();
+        for (int i=0; i<rs.size();i++){
+            String l=String.valueOf(rs.get(i).getPourcentage());
+            list.add(l);
+        }
+        return list;
     }
 }

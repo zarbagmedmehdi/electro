@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="718.0" prefWidth="1063.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ChercherFactureController">
    <children>
-      <TableView fx:id="commandeItemTable" layoutX="508.0" layoutY="511.0" prefHeight="200.0" prefWidth="386.0">
+      <TableView fx:id="commandeItemTable" layoutX="508.0" layoutY="546.0" prefHeight="165.0" prefWidth="472.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
@@ -79,6 +79,7 @@
             </Label>
             <DatePicker fx:id="dateFacturationPicker" layoutX="457.0" layoutY="188.0" />
             <RadioButton fx:id="dateRdBtn" layoutX="388.0" layoutY="192.0" mnemonicParsing="false" onAction="#disableDatePicker" text="oui" />
+            <Button fx:id="chercherBtn" layoutX="414.0" layoutY="228.0" mnemonicParsing="false" onAction="#cherchetBtn" text="Chercher" />
          </children>
       </AnchorPane>
       <Label layoutX="516.0" layoutY="108.0" text="identifiant caissier">
@@ -94,18 +95,32 @@
       <RadioButton fx:id="idCaissierRdBtn" layoutX="686.0" layoutY="113.0" mnemonicParsing="false" onAction="#disable1Sp" text="oui" />
       <RadioButton fx:id="tauxRdBtn" layoutX="686.0" layoutY="148.0" mnemonicParsing="false" onAction="#disable2Sp" text="oui" />
       <Spinner fx:id="idCaissierSpinner" layoutX="746.0" layoutY="109.0" />
-      <TableView fx:id="commandeTable" layoutX="30.0" layoutY="504.0" prefHeight="200.0" prefWidth="416.0">
+      <TableView fx:id="commandeTable" layoutX="30.0" layoutY="554.0" onMouseClicked="#populateCommandeIemTable" prefHeight="150.0" prefWidth="416.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <TableView fx:id="factureTable" layoutX="256.0" layoutY="346.0" prefHeight="150.0" prefWidth="429.0">
+      <TableView fx:id="factureTable" layoutX="248.0" layoutY="371.0" onMouseClicked="#populateCommandeTable" prefHeight="150.0" prefWidth="429.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <Button fx:id="chercherBtn" layoutX="419.0" layoutY="306.0" mnemonicParsing="false" text="Chercher" />
+      <Label layoutX="724.0" layoutY="508.0" prefHeight="28.0" prefWidth="247.0" text="elements du commande :">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="508.0" text="la commande associé :">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="342.0" layoutY="331.0" text="les factures recherchées :">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

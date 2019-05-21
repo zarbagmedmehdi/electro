@@ -25,6 +25,13 @@ public class Electromenager {
     public Electromenager() {
     }
 
+    public Electromenager(String reference,Long id, String libelle, Double prixVente) {
+        this.reference = reference;
+        this.id = id;
+        this.libelle = libelle;
+        this.prixVente = prixVente;
+    }
+
     public Electromenager(String reference, String libelle, String description, Double prixVente, Double prixAchat, int existe, String image, Long sousCategorieId, Long fournisseurID) {
         this.reference = reference;
         this.libelle = libelle;

@@ -105,6 +105,7 @@ public class Controller {
     }
     @FXML
     public void creatBtnClick() throws SQLException {
+    
         System.out.println("creatbtnz");
         selectedItem = cmdTableView.getSelectionModel().getSelectedItem();
         if (selectedItem!=null && cmdTableView.getSelectionModel().getSelectedItem().getEtat().equals("0" )) {
@@ -154,7 +155,7 @@ public class Controller {
         dateFacturation.setText(selectedFacture.getDateFacture().toString());
         modePaiement.setText(selectedFacture.getModePaiement());
         idUser.setText(selectedFacture.getUtilisateurId().toString());
-        Reduction reduction =reductionService.getReductionAdequat(selectedFacture.getReductionID());
+        Reduction reduction =reductionService.getReductionAdequat(selectedFacture.getReductionID(),0F);
         pourcentageReduction.setText(reduction.getPourcentage().toString()+" %");
         Float montant=commandeService.getMontantTotal(Integer.parseInt(selectedItem.getId()));
         montantTotal.setText(montant.toString());

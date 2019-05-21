@@ -14,6 +14,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.toIntExact;
+
 /**
  *
  * @author simob
@@ -67,8 +70,7 @@ cs.registerOutParameter(1, Types.INTEGER);
        Facture facture=new Facture();
         try {
             connection=cnx.getConnectionStatement();
-            //   cs = connection.prepareCall(" select getCommande from dual ");
-            //   cs.registerOutParameter(1, OracleTypes.CURSOR);
+
             CallableStatement call =
                     connection. prepareCall("select * from facture where COMMANDE_ID=?");
             call.setLong(1,idCommande);
@@ -100,13 +102,6 @@ cs.registerOutParameter(1, Types.INTEGER);
 
 
 
-//     emailField.setDisable(true);
-//         nomField.setDisable(true);
-//         montantField.setDisable(true);
-//         idCaissierSpinner.setDisable(true);
-//         tauxSpinner.setDisable(true);
-//         modeSpinner.setDisable(true);
-//        dateFacturationPicker.setDisable(true);
     public List<Facture> findByCriteria(String email, String nom, long idCaissier,String modePaiement ,Date date) throws SQLException {
         Connection connection=null;
         CallableStatement cs = null;
@@ -134,7 +129,7 @@ List<Facture> list=new ArrayList<>();
             call.execute ();
             ResultSet rset=call.getResultSet();
             list=createListFacture(rset);
-            System.out.println(list);
+
         } catch (Exception e) {
             System.err.println("Got an exception!  ");
             System.err.println ( " e" +e.getMessage());
@@ -144,5 +139,34 @@ List<Facture> list=new ArrayList<>();
 
         return list;
     }
+    public List<Facture> findByCriteria2(List<Facture> factureList,Float montantMin) throws SQLException {
+        CommandeService commandeService=new CommandeService();
+        if (montantMin!=0F){
+        for (int i=0;i<factureList.size();i++)
+        {Facture f=factureList.get(i);
+            float montant=commandeService.getMontantTotal( toIntExact(f.getCommandeId()));
+            if (montant<montantMin){
+                factureList.remove(i);
+            }
+        }}
 
+        return factureList;
+    }
+    public  List<Facture> findByCriteria3(List<bean.Facture> factureList, Float pourcentage ) throws SQLException {
+        ReductionService reductionService = new ReductionService();
+        if (pourcentage!=0F) {
+            Reduction r = reductionService.getReductionAdequat(0, pourcentage);
+            System.out.println("hahya reduction f findby 3 "+r);
+
+            for (int i = 0; i < factureList.size(); i++) {
+                Facture f = factureList.get(i);
+
+                if (f.getReductionID() != r.getId()) {
+                    factureList.remove(i);
+                }
+            }
+        }
+        System.out.println("find by criteria 3 la liste des factures "+factureList);
+        return factureList;
+    }
 }
